@@ -1,0 +1,20 @@
+<title>Youtube Downloader</title>
+
+<style>
+    h1 {text-align: center; margin: 150px}
+</style>
+
+<body style="background-image: url('https://cleverrabbits.com/upload/quiz-2244/what-do-you-know-about-cats.jpg'); background-size: cover; background-repeat: no-repeat;">
+
+
+
+    
+    <form action="" method="post">
+    {% csrf_token %}
+    <h1>
+    <label for="url" style="font-size: 30px; color: white;">Paste your youtube URL: </label>
+    <br>
+    <input type="text" name="url" id="url" style="width: 600px; height: 40px;font-size: 20px;text-align: center;">
+    </h1>
+
+</form>

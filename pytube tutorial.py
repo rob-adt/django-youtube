@@ -13,7 +13,7 @@ lengthh=str(datetime.timedelta(seconds=yt.length)) #using datetime to turn the a
 
 print(yt.thumbnail_url) #getting the thumbnail of the videos URL
 
-print({yt.title}) #a way to print the title
+print(yt.title) #a way to print the title
 
 print(f"published on {yt.publish_date} by {yt.channel_url}") #get the publish date of the video and the channel URL
 
