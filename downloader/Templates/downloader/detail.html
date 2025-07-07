@@ -19,21 +19,28 @@
                 video published by {{channel_name}}<br>
                 published on {{pubdate}}<br>
                 <br>
-<br>
+
+                <button onclick="showMessage()"style="background: url('https://cdn-icons-png.flaticon.com/512/724/724933.png') no-repeat center; background-size: cover; width: 100px; height: 100px;border: none; cursor: pointer;"></button>
+
+                    <script>
+                    function showMessage() {
+                    alert("Downloading Video.");
+                    }
+                    
+                    </script>
+
+
+
+
+                <br>
                 <div>
-                <button type="button" class="collapsible" style="text-align: center;"><u> Description</u> </button>
+                <button type="button" class="collapsible" style="text-align: center; font-size: small;"><u> Description</u> </button>
                 <div class="content">
-                    <p>{{description}}</p>
+                    <p style="font-size: small;">{{description}}</p>
                 </div>
-                <!-- <br> -->
             </p>
         </h2>
     </div>
-
-<!-- 
-    <button style="https://cdn.pixabay.com/photo/2016/12/18/13/45/download-1915753_1280.png"></button>
-</body> -->
-
 <!-- code -->
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -59,6 +66,7 @@
   display: none;
   overflow: hidden;
   background-color: #c46e33;
+  color: white;
 }
 </style>
 </head>

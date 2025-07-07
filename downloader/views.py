@@ -3,6 +3,7 @@ import datetime #imports datetime for getting the video length
 from pytubefix import YouTube #imports pytube
 from pytubefix.cli import on_progress #grabs on_progress
 from django.http import HttpResponse
+from .models import Video
 # Create your views here.
 
 def index(request):
@@ -29,6 +30,8 @@ def index(request):
         # downlerd.download()
 
         # We then want to return the web page
+
+        video = Video.objects.create(url=url)
         
         return render(request, "downloader/detail.html", {"channel_name":channel_name,"yt":yt,"formattedViews":formattedViews,"lengthh":lengthh,"thumbnail_url":thumbnail_url,"title":title,"pubdate":pubdate,"description":description})
     
