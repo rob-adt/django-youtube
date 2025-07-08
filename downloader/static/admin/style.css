@@ -1,0 +1,58 @@
+body {
+    background:  rgb(26, 26, 26);
+    
+
+}
+
+#site-name a:link, #site-name a:visited {
+    color: rgb(255, 255, 255);
+}
+
+
+
+#header{
+    background-color: crimson;
+    color: white
+}
+
+a.section:link, a.section:visited {
+    color: white;
+    text-decoration: none;
+}
+
+.module h2, .module caption, .inline-group h2 {
+    background: crimson;
+}
+
+div.breadcrumbs {
+    background: rgb(199, 17, 54)
+}
+
+html[data-theme="light"], :root {
+    --header-color: white
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+    --selected-row: #6d0a1e
+}}
+
+#nav-sidebar .current-model {background: #6d0a1e}
+
+a:link, a:visited { color:rgb(255, 103, 103)} 
+
+@media (prefers-color-scheme: dark) {
+    :root {--link-hover-color: red}}
+
+#changelist-filter li.selected a {
+    color: red;
+}
+
+.hidelink {background: #212121}
+.viewlink, .inlineviewlink {background: #212121}
+
+html[data-theme="light"], :root {--secondary: crimson}
+
+html[data-theme="light"], :root {--button-hover-bg: red}
+
+.button.default, input[type=submit].default, .submit-row input.default {background:#6d0a1e}

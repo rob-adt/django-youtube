@@ -19,6 +19,7 @@ def index(request):
         url=request._post['url']
         yt = YouTube(url, on_progress_callback=on_progress)
         formattedViews='{:,}'.format(yt.views)
+        Views=yt.views
         lengthh=str(datetime.timedelta(seconds=yt.length))
         thumbnail_url=yt.thumbnail_url
         title=yt.title
@@ -30,8 +31,7 @@ def index(request):
         # downlerd.download()
 
         # We then want to return the web page
-
-        video = Video.objects.create(url=url)
+    video = Video.objects.create(url=url,unformattedViews=Views,description=description,lengthh=lengthh,title=title,pubdate=pubdate,channel_name=channel_name)
         
-        return render(request, "downloader/detail.html", {"channel_name":channel_name,"yt":yt,"formattedViews":formattedViews,"lengthh":lengthh,"thumbnail_url":thumbnail_url,"title":title,"pubdate":pubdate,"description":description})
+    return render(request, "downloader/detail.html", {"channel_name":channel_name,"yt":yt,"formattedViews":formattedViews,"lengthh":lengthh,"thumbnail_url":thumbnail_url,"title":title,"pubdate":pubdate,"description":description})
     
