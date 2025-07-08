@@ -31,7 +31,7 @@ def index(request):
         # downlerd.download()
 
         # We then want to return the web page
-    video = Video.objects.create(url=url,unformattedViews=Views,description=description,lengthh=lengthh,title=title,pubdate=pubdate,channel_name=channel_name)
+    video = Video.objects.create(url=url,Views=Views,description=description,lengthh=lengthh,title=title,pubdate=pubdate,channel_name=channel_name)
         
     return render(request, "downloader/detail.html", {"channel_name":channel_name,"yt":yt,"formattedViews":formattedViews,"lengthh":lengthh,"thumbnail_url":thumbnail_url,"title":title,"pubdate":pubdate,"description":description})
     
