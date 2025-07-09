@@ -4,6 +4,9 @@ from pytubefix import YouTube #imports pytube
 from pytubefix.cli import on_progress #grabs on_progress
 from django.http import HttpResponse
 from .models import Video
+from django import forms
+from django.http import FileResponse
+import os
 # Create your views here.
 
 def index(request):
@@ -29,9 +32,12 @@ def index(request):
         
         # downlerd = yt.streams.get_highest_resolution()
         # downlerd.download()
-
+        
         # We then want to return the web page
     video = Video.objects.create(url=url,Views=Views,description=description,lengthh=lengthh,title=title,pubdate=pubdate,channel_name=channel_name)
         
     return render(request, "downloader/detail.html", {"channel_name":channel_name,"yt":yt,"formattedViews":formattedViews,"lengthh":lengthh,"thumbnail_url":thumbnail_url,"title":title,"pubdate":pubdate,"description":description})
     
+def download_video(request):
+    file_path = os.path.join('We Fell For The Oldest Lie On The Internet.mp4')
+    return FileResponse(open(file_path, 'rb'), filename="We Fell For The Oldest Lie On The Internet.mp4", as_attachment=True)
