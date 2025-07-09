@@ -53,7 +53,6 @@ def download_video(request, video_pk):
     return FileResponse(open(file_path, 'rb'), filename=filename, as_attachment=True)
 
 def download_audio(request, video_pk):
-    print("boo")
     video = Video.objects.get(pk=video_pk)
     yt = YouTube(video.url, on_progress_callback=on_progress)
     title=yt.title
