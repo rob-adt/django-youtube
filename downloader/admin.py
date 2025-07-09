@@ -6,6 +6,6 @@ from .models import Video
 class VideoAdmin(admin.ModelAdmin):
     list_display=('title','channel_name','pubdate','lengthh','Views')
     search_fields=('title','description','channel_name')
-    list_filter=('channel_name','pubdate')
+    list_filter=('channel_name','pubdate','requestdate')
 
 admin.site.register(Video)

@@ -7,6 +7,7 @@ from .models import Video
 from django import forms
 from django.http import FileResponse
 import os
+from datetime import date
 # Create your views here.
 
 def index(request):
@@ -29,15 +30,37 @@ def index(request):
         pubdate=yt.publish_date
         channel_name= yt.author
         description=yt.description
+        requestdate = date.today()
         
-        # downlerd = yt.streams.get_highest_resolution()
-        # downlerd.download()
+
+        downlerd = yt.streams.get_highest_resolution()
+
+
         
         # We then want to return the web page
-    video = Video.objects.create(url=url,Views=Views,description=description,lengthh=lengthh,title=title,pubdate=pubdate,channel_name=channel_name)
+    video = Video.objects.create(url=url,Views=Views,description=description,lengthh=lengthh,title=title,pubdate=pubdate,channel_name=channel_name,requestdate=requestdate)
         
-    return render(request, "downloader/detail.html", {"channel_name":channel_name,"yt":yt,"formattedViews":formattedViews,"lengthh":lengthh,"thumbnail_url":thumbnail_url,"title":title,"pubdate":pubdate,"description":description})
+    return render(request, "downloader/detail.html", {"channel_name":channel_name,"yt":yt,"formattedViews":formattedViews,"lengthh":lengthh,"thumbnail_url":thumbnail_url,"title":title,"pubdate":pubdate,"description":description, "pk": video.pk})
     
-def download_video(request):
-    file_path = os.path.join('We Fell For The Oldest Lie On The Internet.mp4')
-    return FileResponse(open(file_path, 'rb'), filename="We Fell For The Oldest Lie On The Internet.mp4", as_attachment=True)
+def download_video(request, video_pk):
+    video = Video.objects.get(pk=video_pk)
+    yt = YouTube(video.url, on_progress_callback=on_progress)
+    title=yt.title
+    downlerd = yt.streams.get_highest_resolution()
+    downlerd.download()
+    filename = title + ".mp4"
+    file_path = os.path.join(filename)
+    return FileResponse(open(file_path, 'rb'), filename=filename, as_attachment=True)
+
+def download_audio(request, video_pk):
+    print("boo")
+    video = Video.objects.get(pk=video_pk)
+    yt = YouTube(video.url, on_progress_callback=on_progress)
+    title=yt.title
+    downlerd=yt.streams.get_audio_only()
+    downlerd.download()
+    filename=title + ".M4a"
+
+    file_path = os.path.join(filename)
+    return FileResponse(open(file_path, 'rb'), filename=filename, as_attachment=True)
+

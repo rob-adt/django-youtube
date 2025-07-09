@@ -24,13 +24,13 @@
 
 
 
-      <form action="download_video" method="post">
-      {% csrf_token %}
-      <button type="submit"
-        style="background: url('https://cdn-icons-png.flaticon.com/512/724/724933.png') no-repeat center; background-size: cover; width: 100px; height: 100px;border: none; cursor: pointer;"></button>
-      </form>
-
-
+      <a href="download_video/{{pk}}"> <img src="https://cdn-icons-png.flaticon.com/512/724/724933.png"  style="background-size: cover; width: 100px; height: 100px;border: none; cursor: pointer;">  </a>
+      <br>
+      <br>
+      <br>
+      <br>
+      
+      <a href="download_audio/{{pk}}"> download the audio only</a>
 
 
       <br>

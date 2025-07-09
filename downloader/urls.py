@@ -4,5 +4,6 @@ from . import views
 
 urlpatterns = [
     path("", views.index),
-    path("download_video", views.download_video)
+    path("download_video/<int:video_pk>", views.download_video),
+    path("download_audio/<int:video_pk>", views.download_audio)
 ]
