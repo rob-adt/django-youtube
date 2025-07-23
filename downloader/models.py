@@ -12,7 +12,6 @@ class Video(models.Model):
     channel_name = models.CharField(max_length=1000,null=True, blank=True)
     requestdate=models.DateField(null=True, blank=True)
     timereq=models.CharField(max_length=20,null=True, blank=True)
-    requests=models.IntegerField(default=0,null=True, blank=True)
     def __str__(self):
         return self.title
     

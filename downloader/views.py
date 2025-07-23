@@ -29,40 +29,17 @@ def index(request):
 
         downlerd = yt.streams.get_highest_resolution()
 
-        video, created = Video.objects.get_or_create(
-            url=url,
-            lengthh=lengthh,
-            pubdate=pubdate,
-            defaults={
-                'title': title,
-                'Views': Views,
-                'description': description,
-                'channel_name': channel_name,
-                'timereq': timereq,
-                'requestdate': requestdate
-                }
-        )
 
-        request = Request.objects.create(
-            title=title,
-            requestdate=requestdate,
-            channel_name=channel_name,
-            stringdate=stringdate,
-            timereq=timereq,
-            url=url
-        )
 
-        return render(request, "downloader/detail.html", {
-            "channel_name": channel_name,
-            "yt": yt,
-            "formattedViews": formattedViews,
-            "lengthh": lengthh,
-            "thumbnail_url": thumbnail_url,
-            "title": title,
-            "pubdate": pubdate,
-            "description": description,
-            "pk": video.pk
-        })
+
+
+        video, created = Video.objects.get_or_create(url=url,lengthh=lengthh,pubdate=pubdate,defaults={'title': title,'Views': Views,'description': description,'channel_name': channel_name,'timereq': timereq,'requestdate': requestdate})
+
+        request = Request.objects.create(title=title,requestdate=requestdate,channel_name=channel_name,stringdate=stringdate,timereq=timereq,url=url,keys=video)
+
+        
+
+        return render(request, "downloader/detail.html", {"channel_name": channel_name,"yt": yt,"formattedViews": formattedViews,"lengthh": lengthh,"thumbnail_url": thumbnail_url,"title": title,"pubdate": pubdate,"description": description,"pk": video.pk})
 
 def download_video(request, video_pk):
     video = Video.objects.get(pk=video_pk)
