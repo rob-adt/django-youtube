@@ -13,3 +13,6 @@ class Video(models.Model):
     requestdate=models.DateField()
     def __str__(self):
         return self.title
+    
+class Request(models.Model):
+    requestdate=models.DateField()
