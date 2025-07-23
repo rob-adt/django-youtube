@@ -4,6 +4,7 @@ from pytubefix import YouTube #imports pytube
 from pytubefix.cli import on_progress #grabs on_progress
 from django.http import HttpResponse
 from .models import Video
+from .models import Request
 from django import forms
 from django.http import FileResponse
 import os
@@ -31,7 +32,7 @@ def index(request):
         channel_name= yt.author
         description=yt.description
         requestdate = date.today()
-        
+        stringdate = ("Request on "+str(requestdate))
 
         downlerd = yt.streams.get_highest_resolution()
 
@@ -39,6 +40,7 @@ def index(request):
         
         # We then want to return the web page
     video = Video.objects.create(url=url,Views=Views,description=description,lengthh=lengthh,title=title,pubdate=pubdate,channel_name=channel_name,requestdate=requestdate)
+    request = Request.objects.create(title=title,requestdate=requestdate,channel_name=channel_name,stringdate=stringdate)
         
     return render(request, "downloader/detail.html", {"channel_name":channel_name,"yt":yt,"formattedViews":formattedViews,"lengthh":lengthh,"thumbnail_url":thumbnail_url,"title":title,"pubdate":pubdate,"description":description, "pk": video.pk})
     

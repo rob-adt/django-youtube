@@ -15,4 +15,7 @@ class Video(models.Model):
         return self.title
     
 class Request(models.Model):
+    title = models.CharField(max_length=101)
     requestdate=models.DateField()
+    channel_name = models.CharField(max_length=1000)
+    stringdate= models.CharField(max_length=1000)

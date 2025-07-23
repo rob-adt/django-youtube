@@ -11,4 +11,10 @@ class VideoAdmin(admin.ModelAdmin):
 
 admin.site.register(Video, VideoAdmin)
 
-admin.site.register(Request)
+class RequestAdmin(admin.ModelAdmin):
+    list_display=('stringdate',"title","channel_name")
+    search_fields=('requestdate',"title","channel_name")
+    list_filter=('requestdate',"title","channel_name")
+
+admin.site.register(Request,RequestAdmin)
+
