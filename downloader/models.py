@@ -25,3 +25,8 @@ class Request(models.Model):
     stringdate= models.CharField(max_length=1000,null=True, blank=True)
     def __str__(self):
         return self.stringdate
+    
+class Quality(models.Model):
+    
+    resolution=models.CharField(max_length=8,null=True, blank=True)
+    qual=models.JSONField(default=list)
