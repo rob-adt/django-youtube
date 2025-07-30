@@ -1,0 +1,7 @@
+
+<h2>Recent Requests</h2>
+<ul>
+  {% for req in recents %}
+    <li>{{ req.requestdate }} - {{ req.title }}</li>
+  {% endfor %}
+</ul>

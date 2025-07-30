@@ -126,9 +126,6 @@ def download_audio(request, video_pk):
     file_path = os.path.join(filename)
     return FileResponse(open(file_path, 'rb'), filename=filename, as_attachment=True)
 
-class detailView(generic.ListView):
-    template_name = "polls/detail.html"
-    context_object_name = "latest_video_list"
-
-    def get_queryset(self):
-        return Request.objects.filter(pub_date__lte=timezone.now()).order_by("-timereq")[:5]
+def index(request):
+    recents = Request.objects.order_by('-requestdate')[:3]
+    return render (request,'downloader/index.html',{'recents':recents})
