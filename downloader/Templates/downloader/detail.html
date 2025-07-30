@@ -7,7 +7,7 @@
 </style>
 
 {% load static %}
-<link rel="shortcut icon" href="https://www.youtube.com/s/desktop/f788da0a/img/logos/favicon.ico" type="image/x-icon">
+<link rel="shortcut icon" href="https://www.edigitalagency.com.au/wp-content/uploads/YouTube-icon-red-png.png" type="image/x-icon">
 
 
 <title>Youtube Downloader</title>
@@ -26,13 +26,28 @@
 
 
 
-      download the video here <br>
-      <a href="download_video/{{pk}}"> <img src="https://cdn-icons-png.flaticon.com/512/724/724933.png"  style="background-size: cover; width: 100px; height: 100px;border: none; cursor: pointer;">  </a>
+        download the video here <br>
+      <form action="download_video/{{pk}}">
+        <label for="quality">Choose a resolution:</label>
+        <select name="quality" id="quality">
+          {% for item in qual %}
+          <option value={{item}}>{{item}}</option>
+          {% endfor %}
+        </select>
+        <br><br>
+        <button><img src="https://cdn-icons-png.flaticon.com/512/724/724933.png"
+            style="background-size: cover; width: 100px; height: 100px;border: none; cursor: pointer;"></button>
+      </form>
+
+
+
+      <!-- <a href="download_video/{{pk}}"> <img src="https://cdn-icons-png.flaticon.com/512/724/724933.png"
+          style="background-size: cover; width: 100px; height: 100px;border: none; cursor: pointer;"> </a> -->
       <br>
       <br>
       <br>
       <br>
-      
+
       <a href="download_audio/{{pk}}"> download the audio only</a>
 
 

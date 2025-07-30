@@ -9,8 +9,8 @@ from datetime import date
 import time
 import os
 from moviepy import CompositeAudioClip, VideoFileClip, AudioFileClip, CompositeVideoClip
-
-
+from datetime import timezone
+from django.views import generic
 
 temp_folder = "tmp/"
 
@@ -36,7 +36,9 @@ def index(request):
         resolution=resolut.resolution
         downlerd = yt.streams.get_highest_resolution()
 
-        if resolution == '2160p' or resolution == '1440p':
+        if resolution == '2160p':
+            qual=["2160p","1440p","1080p","720p","480p","360p","240p","144p"] 
+        elif resolution == '1440p':
             qual=["1440p","1080p","720p","480p","360p","240p","144p"]  
         elif resolution == "1080p":
             qual=["1080p","720p","480p","360p","240p","144p"] 
@@ -64,14 +66,7 @@ def index(request):
              url=url,
              lengthh=lengthh,
              pubdate=pubdate,
-             defaults={
-                  'title': title,
-                  'Views': Views,
-                  'description': description,
-                  'channel_name': channel_name,
-                  'timereq': timereq,
-                  'requestdate': requestdate
-                  })
+             defaults={'title': title,'Views': Views,'description': description,'channel_name': channel_name,'timereq': timereq,'requestdate': requestdate})
 
 
         request = Request.objects.create(title=title,requestdate=requestdate,channel_name=channel_name,stringdate=stringdate,timereq=timereq,url=url,keys=video)
@@ -84,13 +79,13 @@ def index(request):
 
         video.save()
 
-        return render(request, "downloader/detail.html", {"channel_name": channel_name,"yt": yt,"formattedViews": formattedViews,"lengthh": lengthh,"thumbnail_url": thumbnail_url,"title": title,"pubdate": pubdate,"description": description,"pk": video.pk})
+        return render(request, "downloader/detail.html", {"channel_name": channel_name,"yt": yt,"formattedViews": formattedViews,"lengthh": lengthh,"thumbnail_url": thumbnail_url,"title": title,"pubdate": pubdate,"description": description,"pk": video.pk, "qual":qual})
 
 
 
 def download_video(request, video_pk):
     
-    qual=Quality.qual
+    qual=request.GET["quality"]
     
     video = Video.objects.get(pk=video_pk)
     yt = YouTube(video.url, on_progress_callback=on_progress)
@@ -130,3 +125,10 @@ def download_audio(request, video_pk):
     filename = title + ".M4a"
     file_path = os.path.join(filename)
     return FileResponse(open(file_path, 'rb'), filename=filename, as_attachment=True)
+
+class detailView(generic.ListView):
+    template_name = "polls/detail.html"
+    context_object_name = "latest_video_list"
+
+    def get_queryset(self):
+        return Request.objects.filter(pub_date__lte=timezone.now()).order_by("-timereq")[:5]
